@@ -15,15 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(autoSlide, 3000);
 
-  window.openNav = function () {
-    const sideNav = document.getElementById("sideNav");
-    if (sideNav.className.includes("show")) {
-      sideNav.className = sideNav.className.replace(" show", "");
-    } else {
-      sideNav.className += " show";
-    }
-  };
+  const navLinks = document.querySelectorAll("#sideNav a");
 
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const sideNav = document.getElementById("sideNav");
+      sideNav.classList.remove("show");
+    });
+  });
+ const sideNav = document.getElementById("sideNav");
+  const hamburger = document.querySelector(".hamburger");
+
+  window.addEventListener("click", (e) => {
+   
+    if (
+      sideNav.classList.contains("show") &&
+      !sideNav.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      sideNav.classList.remove("show");
+    }
+  });
   let currentlyOpenModal = null;
 
   function setupModal(triggerSelector, modalSelector, closeSelector) {
@@ -69,3 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupModal(".open-terms", "terms", "close-terms");
   setupModal(".open-support", "support", "close-support");
 });
+function toggleNav() {
+      const sideNav = document.getElementById('sideNav');
+      sideNav.classList.toggle('show');
+      
+    }
